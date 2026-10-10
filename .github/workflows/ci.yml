@@ -114,7 +114,7 @@ jobs:
           "exported $($lines.Count) process-creation events"
       - name: accepted drafts fire on the re-emulation and stay silent on the baseline
         run: python scripts/revalidate_loop.py --events events.jsonl --windows windows.json --out revalidation.json
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: loop-revalidation
@@ -157,7 +157,7 @@ jobs:
           docker build -q -t throughline:scan .
           docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.75.0 image \
             --scanners vuln --severity HIGH,CRITICAL --ignore-unfixed --format table throughline:scan | tee trivy.txt
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: compose-e2e
@@ -190,7 +190,7 @@ jobs:
         run: |
           docker run --rm -v "$PWD:/repo" --entrypoint sh ghcr.io/gitleaks/gitleaks:v8.30.1 -c \
             'git config --global --add safe.directory /repo && gitleaks git /repo --redact --no-banner -v'
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: security
